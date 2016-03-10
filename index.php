@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>ECharts</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="bookmark" href="favicon.ico">
+    <title>沈泽明毕业设计</title>
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
@@ -10,6 +13,27 @@
     <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
     <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
     <script type="text/javascript">
+        <?php 
+            function getIp(){
+                if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
+                $ip = getenv("HTTP_CLIENT_IP");
+                else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+                $ip = getenv("HTTP_X_FORWARDED_FOR");
+                else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+                $ip = getenv("REMOTE_ADDR");
+                else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+                $ip = $_SERVER['REMOTE_ADDR'];
+                else
+                $ip = "unknown";
+                return($ip);
+            }
+        ?>
+        //初始化地图DOM高度
+        $(document).ready(function(){
+            $('#china_mapChart').css('height',window.innerHeight);
+            console.log('<?php echo getIp(); ?>');
+        });
+
         // 路径配置
         require.config({
             paths: {
@@ -36,8 +60,8 @@
                     backgroundColor: '#1b1b1b',
                     color: ['gold','aqua','lime'],
                     title : {
-                        text: '模拟迁徙',
-                        subtext:'数据纯属虚构',
+                        text: '网络安全监测',
+                        // subtext:'数据纯属虚构',
                         x:'center',
                         textStyle : {
                             color: '#fff'
@@ -49,7 +73,8 @@
                     },
                     legend: {
                         orient: 'vertical',
-                        x:'left',
+                        x:'right',
+                        y:'bottom',
                         data:['北京 Top10', '上海 Top10', '广州 Top10'],
                         selectedMode: 'single',
                         selected:{
@@ -585,8 +610,9 @@
 
                 chinaMapchart.setOption(option);
 
-                /*地图响应*/
+                /*地图窗口响应*/
                 window.onresize = function () {
+                    $('#china_mapChart').css('height',window.innerHeight);
                     chinaMapchart.resize();
                 };
             }

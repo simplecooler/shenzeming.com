@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style/manage.css">
-    <title></title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="bookmark" href="favicon.ico">
+    <title>神盾局秘密基地</title>
   </head>
   <body>
     <img class="logo" src="image/logo.png" alt="图片加载失败"/>

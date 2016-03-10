@@ -6,8 +6,9 @@
     <title></title>
   </head>
   <body>
-    <?php echo "hello world!"; ?>
+    <div id="visitChinaMapChart" class="animated bounceInDown"></div>
   </body>
   <script src="script/jquery-2.2.1.min.js"></script>
+  <script src="script/echarts-2.2.7/build/dist/echarts-all.js"></script>
   <script src="script/script.js"></script>
 </html>

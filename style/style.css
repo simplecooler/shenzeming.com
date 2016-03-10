@@ -1,3 +1,8 @@
 body {
 	margin:0;
 }
+
+#visitChinaMapChart {
+	height: 700px;
+	width: 100%;
+}

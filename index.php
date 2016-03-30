@@ -11,9 +11,17 @@
     <div id="china_mapChart"></div>
     <!-- 文件引入 -->
     <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script>
+      var socket = io('http://www.shenzeming.com:8000');
+      socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+      });
+    </script>
     <script type="text/javascript">
-        <?php 
+        <?php
             function getIp(){
                 if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
                 $ip = getenv("HTTP_CLIENT_IP");

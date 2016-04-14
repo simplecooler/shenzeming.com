@@ -14,32 +14,35 @@
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
     <script>
-      var socket = io('http://www.shenzeming.com:8000');
-      socket.on('news', function (data) {
-        console.log(data);
-        socket.emit('my other event', { my: 'data' });
-      });
+      // var socket = io('http://www.shenzeming.com:8000');
+      // socket.on('news', function (data) {
+      //   console.log(data);
+      //   socket.emit('my other event', { my: 'data' });
+      // });
     </script>
     <script type="text/javascript">
-        <?php
-            function getIp(){
-                if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
-                $ip = getenv("HTTP_CLIENT_IP");
-                else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
-                $ip = getenv("HTTP_X_FORWARDED_FOR");
-                else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
-                $ip = getenv("REMOTE_ADDR");
-                else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
-                $ip = $_SERVER['REMOTE_ADDR'];
-                else
-                $ip = "unknown";
-                return($ip);
-            }
-        ?>
+
+        function getIpLoaction() {
+            return '<?php
+                function getCity($ip)
+                {
+                    $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+                    $ipinfo=json_decode(file_get_contents($url));
+                    if($ipinfo->code=='1'){
+                        return false;
+                    }
+                    $city = $ipinfo->data->city;
+                    return $city;
+                }
+
+                echo(getCity("117.144.21.30"));
+            ?>'
+        }
+
         //初始化地图DOM高度
         $(document).ready(function(){
             $('#china_mapChart').css('height',window.innerHeight);
-            console.log('<?php echo getIp(); ?>');
+            console.log(getIpLoaction());
         });
 
         // 路径配置

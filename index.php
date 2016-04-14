@@ -2,8 +2,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style/style.css">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="bookmark" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <title>沈泽明毕业设计</title>
 </head>
 <body>

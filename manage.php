@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style/manage.css">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="bookmark" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <title>神盾局秘密基地</title>
   </head>
   <body>

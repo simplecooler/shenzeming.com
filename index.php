@@ -13,14 +13,13 @@
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
     <script>
-      // var socket = io('http://www.shenzeming.com:8000');
-      // socket.on('news', function (data) {
-      //   console.log(data);
-      //   socket.emit('my other event', { my: 'data' });
-      // });
+      var socket = io('http://www.shenzeming.com:8000');
+      socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+      });
     </script>
     <script type="text/javascript">
-
         function getClientIpLoaction() {
             return '<?php
                 function getIp() {
@@ -49,26 +48,10 @@
             ?>'
         }
 
-        // function getServerIpLoaction() {
-        //     return '<?php
-        //         function getCity($ip) {
-        //             $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
-        //             $ipinfo=json_decode(file_get_contents($url));
-        //             if($ipinfo->code=='1'){
-        //                 return false;
-        //             }
-        //             $city = $ipinfo->data->city;
-        //             return $city;
-        //         }
-        //         echo(getCity("115.29.114.65"));
-        //     ?>'
-        // }
-
         //初始化地图DOM高度
         $(document).ready(function(){
             $('#china_mapChart').css('height',window.innerHeight);
             console.log(getClientIpLoaction());
-            // console.log(getServerIpLoaction());
         });
 
         // 路径配置
@@ -108,20 +91,6 @@
                         trigger: 'item',
                         formatter: '{b}'
                     },
-                    // legend: {
-                    //     orient: 'vertical',
-                    //     x:'right',
-                    //     y:'bottom',
-                    //     data:['北京 Top10', '上海 Top10', '广州 Top10'],
-                    //     selectedMode: 'single',
-                    //     selected:{
-                    //         '上海 Top10' : false,
-                    //         '广州 Top10' : false
-                    //     },
-                    //     textStyle : {
-                    //         color: '#fff'
-                    //     }
-                    // },
                     toolbox: {
                         show : true,
                         orient : 'vertical',
@@ -134,15 +103,6 @@
                             saveAsImage : {show: true}
                         }
                     },
-                    // dataRange: {
-                    //     min : 0,
-                    //     max : 100,
-                    //     calculable : true,
-                    //     color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
-                    //     textStyle:{
-                    //         color:'#fff'
-                    //     }
-                    // },
                     series : [
                         {
                             name: '全国',

@@ -121,13 +121,13 @@ require([
                 var orient = $(this).attr('data-orient');  //暂时只有bottom和right
 
                 if(status !== 'hide'){
-                    (orient === 'bottom') ? 
+                    (orient === 'bottom') ?
                         Util.moveAnim(el, 0, 0, 0, el.offsetHeight)
                         : Util.moveAnim(el, 0, 0, el.offsetWidth, 0);
                     $(this).attr('data-status', 'hide').text('展开');
                 }
                 else{
-                    (orient === 'bottom') ? 
+                    (orient === 'bottom') ?
                         Util.moveAnim(el, 0, el.offsetHeight, 0, 0)
                         : Util.moveAnim(el, el.offsetWidth, 0, 0, 0);
                     $(this).attr('data-status', '').text('收起');
@@ -144,9 +144,9 @@ require([
             if($frag.length === 0){
                 $frag = $('<div id="' + id + '" class="attack-detail"></div>');
                 $frag.append(
-                    '<p>时间: ' + attack['time'] + '</p>' + 
-                    '<p>类型: ' + attack['type'] + '攻击' + '</p>' + 
-                    '<p>攻击源: ' + attack['srcIp'] + ' (' + attack['srcName'] + ')' + 
+                    '<p>时间: ' + attack['time'] + '</p>' +
+                    '<p>类型: ' + attack['type'] + '攻击' + '</p>' +
+                    '<p>攻击源: ' + attack['srcIp'] + ' (' + attack['srcName'] + ')' +
                     '<p>攻击目标: ' + attack['destIp'] + ' (' + attack['destName'] + ')'
                 );
 
@@ -175,10 +175,10 @@ require([
 
         // 攻击数据展现
         _renderAttacks: function(data){
-            // render map
+            // 渲染地图
             this.aMap.setAttacks(data);
 
-            // render table
+            // 渲染表格
             var $tbody = $('#attacksTable').find('tbody');
             // var $frags = [];
             $.each(data, function(i, v){
@@ -211,10 +211,10 @@ require([
         }
     };
 
-    // execution
+    // 执行
     View.init();
 
-    // lazy load
+    // 懒加载
     setTimeout(function(){
         View.getAttacks();
     }, 16);

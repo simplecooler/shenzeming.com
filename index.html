@@ -3,7 +3,7 @@
     <head>
         <title>沈泽明毕业设计</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" type="text/css" href="style/normalize.min.css">
+        <link rel="stylesheet" type="text/css" href="style/normalize.css">
         <link rel="stylesheet" type="text/css" href="style/common.css">
 
         <style type="text/css">
@@ -11,13 +11,10 @@
                 overflow: hidden;
             }
             body{
-                background: url('image/bg.jpg') no-repeat;
-                /*background-size: 100% 100%;*/
-                background-size: cover;
+                background-color: #1b1b1b;
                 min-height: 100vh;
             }
             #topDiv{
-                /*background-color: #000;*/
                 height: 50px;
                 padding: 10px 12px;
                 overflow: hidden;
@@ -56,7 +53,8 @@
             }
             #navList{
                 font-family: 'Miscrosoft Yahei';
-                margin: 10px 0;
+                text-align: center;
+                margin: 10px auto;
                 padding: 0;
                 list-style: none;
                 overflow: hidden;
@@ -65,16 +63,18 @@
             .view-nav{
                 color: #fff;
                 cursor: pointer;
-                float: left;
+                display: inline-block;
                 font-size: 20px;
                 height: 30px;
                 line-height: 30px;
                 text-align: center;
                 padding: 0 5px;
                 min-width: 60px;
+                float: left;
+                border-radius: 4px;
             }
             .view-nav.active{
-                background-color: #fc0;
+                background-color: #ffffff;
                 color: #333;
             }
             /* 导航 */
@@ -113,6 +113,7 @@
                 padding: 6px 10px;
                 box-sizing: border-box;
                 margin-bottom: -1px;
+                border-radius: 0px 5px 5px 5px;
             }
             #sitesDiv .monitor-status{
                 position: absolute;
@@ -134,7 +135,7 @@
             }
             #attacksDiv .monitor-status{
                 position: absolute;
-                top: -32px;
+                top: -30px;
                 right: 200px;
                 padding: 0.5em 1em;
                 border-bottom-left-radius: 0;
@@ -177,42 +178,6 @@
             <div id="mapChart"></div>
             <input type="hidden" id="orgAdminId" value="${orgAdmin.id}">
 
-            <div class="monitor" id="sitesDiv">
-                <div class="monitor-inner">
-                    <table class="table table-condensed" id="sitesTable">
-                        <thead>
-                            <tr>
-                                <th class="span2">站点名</th>
-                                <th class="span2">位置</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="#" class="default">南京大学</a></td>
-                                <td>南京</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="default">软件学院</a></td>
-                                <td>南京</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="default">南京大学苏州研究生院</a></td>
-                                <td>苏州</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="default">工程实习中心</a></td>
-                                <td>上海</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="default">华北招生中心</a></td>
-                                <td>北京</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <a href="javascript:void(0)" class="monitor-status J_changeMonitor" data-orient="right">收起</a>
-            </div>
-
             <div class="monitor" id="attacksDiv">
                 <div class="monitor-inner">
                     <table class="table table-condensed" id="attacksTable">
@@ -234,35 +199,35 @@
         </div>
 
         <script type="text/javascript">
-            function getClientIpLoaction() {
-                return '<?php
-                    function getIp() {
-                    if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
-                        $ip = getenv("HTTP_CLIENT_IP");
-                    else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
-                        $ip = getenv("HTTP_X_FORWARDED_FOR");
-                    else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
-                        $ip = getenv("REMOTE_ADDR");
-                    else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
-                        $ip = $_SERVER['REMOTE_ADDR'];
-                    else
-                        $ip = "unknown";
-                    return($ip);
-                    }
-                    function getCity($ip) {
-                        $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
-                        $ipinfo=json_decode(file_get_contents($url));
-                        if($ipinfo->code=='1'){
-                            return false;
-                        }
-                        $city = $ipinfo->data->city;
-                        return $city;
-                    }
-                    echo(getCity(getIp()));
-                ?>'
-            }
+            // function getClientIpLoaction() {
+            //     return '<?php
+            //         function getIp() {
+            //         if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
+            //             $ip = getenv("HTTP_CLIENT_IP");
+            //         else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+            //             $ip = getenv("HTTP_X_FORWARDED_FOR");
+            //         else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+            //             $ip = getenv("REMOTE_ADDR");
+            //         else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+            //             $ip = $_SERVER['REMOTE_ADDR'];
+            //         else
+            //             $ip = "unknown";
+            //         return($ip);
+            //         }
+            //         function getCity($ip) {
+            //             $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+            //             $ipinfo=json_decode(file_get_contents($url));
+            //             if($ipinfo->code=='1'){
+            //                 return false;
+            //             }
+            //             $city = $ipinfo->data->city;
+            //             return $city;
+            //         }
+            //         echo(getCity(getIp()));
+            //     ?>'
+            // }
 
-            console.log(getClientIpLoaction());
+            // console.log(getClientIpLoaction());
         </script>
         <script type="text/javascript" src="http://cdn.staticfile.org/require.js/2.1.15/require.min.js"></script>
         <script type="text/javascript" src="script/config.js"></script>

@@ -12,7 +12,6 @@ define(function(){
 
     return {
         backgroundColor: COLOR_BG,
-        color: ['gold','aqua','lime'],
         tooltip: {
             trigger: 'item',
             formatter: function(params, ticket, callback){
@@ -53,14 +52,14 @@ define(function(){
                 data: [],
                 markLine : {
                     clickable: false,
-                    symbol: ['triangle', 'none'],
+                    symbol: ['circle', 'none'],
                     symbolSize: [5, 4],
                     smooth: false,
                     effect: {
                         show: true,
                         scaleSize: 1,
                         period: 15,
-                        color: COLOR_LINE_EFFECT,
+                        color: '#ff0000',
                         shadowBlur: 20
                     },
                     itemStyle: {

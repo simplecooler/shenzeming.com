@@ -44,6 +44,7 @@ define(function(require){
             var mapOption = U.extend({}, require('mods/attackMap/mapOption'));
             // 合并option
             U.extend(mapOption.series[0], this._getViewOption(this.config.view));
+            // U.extend(mapOption.series[1], this._getViewOption(this.config.view));
             // render
             this._chart.setOption(mapOption);
 
@@ -58,11 +59,11 @@ define(function(require){
         _bindEvents: function(){
             var that = this;
             this._chart.on(EVENT.CLICK, function(e, chart){
-                // 仅对中国钻取
+                // 仅对中国
                 if(e.data.name === '中国' || e.data.name === 'China'){
                     that.setView(MAP_TYPE_CHINA);
                 }
-                // and中国省份钻取
+                // and中国省份
                 else if(e.data.name in ecMapParams){
                     that.setView(e.data.name);
                 }
@@ -107,7 +108,6 @@ define(function(require){
             else if(viewType === MAP_TYPE_CHINA){
                 return {
                     mapType: MAP_TYPE_CHINA
-                    // ,geoCoord: require('geo/china/city').sample  //不全
                 };
             }
             else if(viewType in ecMapParams){
@@ -163,25 +163,18 @@ define(function(require){
             this._chart.setSeries([viewOption]);
             // 多级的option没法merge原来的，所以得手动设置
             this._setOtherOption(viewType);
-            
+
             // 对外fire事件
             this.fire(
-                AttackMap.EVENTS.VIEW_CHANGED, 
+                AttackMap.EVENTS.VIEW_CHANGED,
                 { viewType: viewType }
             );
         },
 
         // 攻击线
         setAttacks: function(data, isLoop){
-            // 是否循环显示markline（暂未用到）
             isLoop = isLoop || true;
-            // 留个data备份（暂未用到）
             this._mData = data;
-
-            // TODO: 要对IP聚合
-            // 国内最小定位到市级，国外只能定位到国家
-            // 而markline只能通过 name-name 来标识
-            // 聚合后相同 name-name 的攻击累计次数视为强度
 
             var lineData = U.map(data, function(v){
                 return [
@@ -201,14 +194,11 @@ define(function(require){
             var _map = this._chart.chart.map;
             // 防止addMarkLine抛异常 seriesIndex 0
             // _map.buildMark(0);
-
-            // FUCK
             try{
                 this._chart.addMarkLine(0, {data: lineData});
             }catch(e){
                 // console.error(e);
             }
-            
             try{
                 this._chart.addMarkPoint(0, {data: pointData});
             }catch(e){
@@ -223,7 +213,7 @@ define(function(require){
             this._handlers[type].push(fn);
         },
         fire: function(type, data, event){
-            if(typeof this._handlers === 'undefined' || 
+            if(typeof this._handlers === 'undefined' ||
                 typeof this._handlers[type] === 'undefined'){
                 return false;
             }
@@ -235,12 +225,12 @@ define(function(require){
             };
             // 原生event对象
             (typeof event !== 'undefined') && (eventObj.event = event);
-            
+
             U.each(this._handlers[type], function(fn){
                 fn(eventObj, that);
             });
         },
-        
+
         // 通用方法
         refresh: function(){
             this._chart.refresh();

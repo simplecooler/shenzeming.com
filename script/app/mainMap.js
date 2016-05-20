@@ -223,4 +223,13 @@ require([
         $('#sitesDiv').find('.J_changeMonitor').click();
     }, 3000);
 
+    $('#stop_btn').click(function() {
+        $.ajax({
+            url: 'http://www.shenzeming.com:3000',
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
+
 });

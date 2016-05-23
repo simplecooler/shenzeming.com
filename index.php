@@ -203,35 +203,35 @@
         <script type="text/javascript" src="script/config.js"></script>
         <script type="text/javascript" src="script/app/mainMap.js"></script>
         <script type="text/javascript">
-            // function getClientIpLoaction() {
-            //     return '<?php
-            //         function getIp() {
-            //         if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
-            //             $ip = getenv("HTTP_CLIENT_IP");
-            //         else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
-            //             $ip = getenv("HTTP_X_FORWARDED_FOR");
-            //         else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
-            //             $ip = getenv("REMOTE_ADDR");
-            //         else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
-            //             $ip = $_SERVER['REMOTE_ADDR'];
-            //         else
-            //             $ip = "unknown";
-            //         return($ip);
-            //         }
-            //         function getCity($ip) {
-            //             $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
-            //             $ipinfo=json_decode(file_get_contents($url));
-            //             if($ipinfo->code=='1'){
-            //                 return false;
-            //             }
-            //             $city = $ipinfo->data->city;
-            //             return $city;
-            //         }
-            //         echo(getCity(getIp()));
-            //     ?>'
-            // }
-
-            // console.log(getClientIpLoaction());
+            function getClientIpLoaction() {
+                return '<?php
+                    function getIp() {
+                    if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
+                        $ip = getenv("HTTP_CLIENT_IP");
+                    else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+                        $ip = getenv("HTTP_X_FORWARDED_FOR");
+                    else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+                        $ip = getenv("REMOTE_ADDR");
+                    else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+                        $ip = $_SERVER['REMOTE_ADDR'];
+                    else
+                        $ip = "unknown";
+                    return($ip);
+                    }
+                    function getCity($ip) {
+                        $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+                        $ipinfo=json_decode(file_get_contents($url));
+                        if($ipinfo->code=='1'){
+                            return false;
+                        }
+                        $city = $ipinfo->data->city;
+                        return $city;
+                    }
+                    echo(getIp());
+                    echo(getCity(getIp()));
+                ?>'
+            }
+            console.log(getClientIpLoaction());
         </script>
     </body>
 </html>

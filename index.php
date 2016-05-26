@@ -199,11 +199,12 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="http://cdn.staticfile.org/require.js/2.1.15/require.min.js"></script>
+        <script type="text/javascript" src="script/lib/jquery.js"></script>
+        <script type="text/javascript" src="script/require.js"></script>
         <script type="text/javascript" src="script/config.js"></script>
         <script type="text/javascript" src="script/app/mainMap.js"></script>
         <script type="text/javascript">
-            function getClientIpLoaction() {
+            function getClientIp() {
                 return '<?php
                     function getIp() {
                     if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
@@ -218,8 +219,26 @@
                         $ip = "unknown";
                     return($ip);
                     }
-                    function getCity($ip) {
-                        $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+                    echo(getIp());
+                ?>'
+            }
+            function getClientIpLoaction() {
+                return '<?php
+                    function getRealIp() {
+                    if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
+                        $ipp = getenv("HTTP_CLIENT_IP");
+                    else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+                        $ipp = getenv("HTTP_X_FORWARDED_FOR");
+                    else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+                        $ipp = getenv("REMOTE_ADDR");
+                    else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+                        $ipp = $_SERVER['REMOTE_ADDR'];
+                    else
+                        $ipp = "unknown";
+                    return($ipp);
+                    }
+                    function getCity($ipp) {
+                        $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ipp;
                         $ipinfo=json_decode(file_get_contents($url));
                         if($ipinfo->code=='1'){
                             return false;
@@ -227,11 +246,21 @@
                         $city = $ipinfo->data->city;
                         return $city;
                     }
-                    echo(getIp());
-                    echo(getCity(getIp()));
+                    echo(getCity(getRealIp()));
                 ?>'
             }
-            console.log(getClientIpLoaction());
+
+            var ip = getClientIp();
+            var city = getClientIpLoaction();
+            console.log(ip);
+            console.log(city);
+            $.post(
+                'http://www.shenzeming.com:3000',
+                {_ip: ip, _city: city},
+                function(data) {
+                    console.log(data);
+                }
+            );
         </script>
     </body>
 </html>

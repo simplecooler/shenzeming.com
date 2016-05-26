@@ -8,9 +8,9 @@ define(function(require){
     var ecMapParams = require('echarts/util/mapData/params').params;
 
     var EVENT = require('echarts/config').EVENT;
+
     var MAP_TYPE_WORLD = 'world';
     var MAP_TYPE_CHINA = 'china';
-
 
     var AttackMap = function(config){
         this.config = U.extend({
